@@ -10,7 +10,6 @@
     pageEncoding="UTF-8"%>
 <%
 	String mid=request.getParameter("mid1");
-	System.out.println("11");
 	Connection con=null;
 	PreparedStatement pstmt=null;
 	ResultSet rs=null;

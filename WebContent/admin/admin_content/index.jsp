@@ -65,7 +65,7 @@
 		게시판관리
 			<ul class="sub">
 				<li><a href="${cp }/admin/qna">QnA</a></li>
-				<li><a href="${cp }/admin/faq">FAQ</a></li>
+				<li><a href="${cp }/admin/faq/list">FAQ</a></li>
 				<li>menu2 - 3</li>
 			</ul>
 		</li>

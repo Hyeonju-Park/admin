@@ -58,7 +58,7 @@
 	<c:if test="${endPageNum<pageCount }">
 		<a href="${cp }/admin/memberlist?pageNum=${endPageNum+1 }">[다음]</a>
 	</c:if>
-	<form method="post" action="${cp }/admin/memberlist">
+<form method="post" action="${cp }/admin/memberlist">
 		<select name="field">
 			<option value="mid">아이디</option>
 		</select>

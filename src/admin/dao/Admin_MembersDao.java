@@ -1,18 +1,18 @@
 package admin.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLClientInfoException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 import admin.vo.Admin_MembersVo;
 import test.db.DBConnection;
 
 public class Admin_MembersDao {
-	public int getinfo(String mid) {
+	public Admin_MembersVo getinfo(String mid) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -29,12 +29,19 @@ public class Admin_MembersDao {
 				String maddress=rs.getString("maddress");
 				String mpost=rs.getString("mpost");
 				String mphone=rs.getString("mphone");
-				String mname=rs.getString("mname");
-				
+				Date mrdate=rs.getDate("mrdate");
+				Date mbirth=rs.getDate("mbirth");
+				int mdrop=rs.getInt("mdrop");
+				int mmileage=rs.getInt("mmileage");
+				String memail=rs.getString("memail");
+				Admin_MembersVo vo=new Admin_MembersVo(mid, mpw, mname, maddress, mpost, mphone,
+						mrdate, mbirth, mdrop, mmileage, memail);
+				return vo;
 			}
+			return null;
 		}catch(SQLException s) {
 			s.printStackTrace();
-			return -1;
+			return null;
 		}finally {
 			DBConnection.close(con, pstmt, null);
 		}
@@ -122,20 +129,7 @@ public class Admin_MembersDao {
 		int n=0;
 		try {
 			con=DBConnection.getCon();
-			if(vo.getMbirth()==null) {
-				sql="insert into members values(?,?,?,?,?,?,sysdate,sysdate,0,1000,?)";
-				pstmt=con.prepareStatement(sql);
-				
-				pstmt.setString(1, vo.getMid());
-				pstmt.setString(2, vo.getMpw());
-				pstmt.setString(3, vo.getMname());
-				pstmt.setString(4, vo.getMaddress());
-				pstmt.setString(5, vo.getMpost());
-				pstmt.setString(6, vo.getMphone());
-				pstmt.setString(7, vo.getMemail());
-				n=pstmt.executeUpdate();
-			}else {
-				sql="insert into members values(?,?,?,?,?,?,sysdate,?,0,1000,?)";
+			sql="insert into members values(?,?,?,?,?,?,sysdate,?,0,1000,?)";
 				pstmt=con.prepareStatement(sql);
 				pstmt.setString(1, vo.getMid());
 				pstmt.setString(2, vo.getMpw());
@@ -146,7 +140,7 @@ public class Admin_MembersDao {
 				pstmt.setDate(7, vo.getMbirth());
 				pstmt.setString(8, vo.getMemail());
 				n=pstmt.executeUpdate();
-			}
+			
 			return n;
 		}catch(SQLException s) {
 			s.printStackTrace();
@@ -161,7 +155,7 @@ public class Admin_MembersDao {
 		try {
 			con=DBConnection.getCon();
 			String sql="update members set mpw=?, mname=?, maddress=?, mpost=?, mphone=?"+
-					"mbirth=?,mmileage=?,memail=? where mid=?";
+					",mbirth=?,mmileage=?,memail=? where mid=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, vo.getMpw());
 			pstmt.setString(2, vo.getMname());

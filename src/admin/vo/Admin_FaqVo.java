@@ -6,19 +6,17 @@ public class Admin_FaqVo {
 	private int fid;
 	private String ftitle;
 	private String fcontent;
-	private String ffile;
 	private Date frdate;
 	private int fhit;
 	private int fpublic_private;
 	private String aid;
 	public Admin_FaqVo() {}
-	public Admin_FaqVo(int fid,String ftitle,String fcontent,String ffile,Date frdate,
+	public Admin_FaqVo(int fid,String ftitle,String fcontent,Date frdate,
 							int fhit, int fpublic_private,String aid) {
 		super();
 		this.fid=fid;
 		this.ftitle=ftitle;
 		this.fcontent=fcontent;
-		this.ffile=ffile;
 		this.frdate=frdate;
 		this.fhit=fhit;
 		this.fpublic_private=fpublic_private;
@@ -42,12 +40,7 @@ public class Admin_FaqVo {
 	public void setFcontent(String fcontent) {
 		this.fcontent = fcontent;
 	}
-	public String getFfile() {
-		return ffile;
-	}
-	public void setFfile(String ffile) {
-		this.ffile = ffile;
-	}
+	
 	public Date getFrdate() {
 		return frdate;
 	}

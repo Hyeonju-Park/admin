@@ -13,20 +13,20 @@ import test.db.DBConnection;
 public class Admin_FaqDao {
 	public ArrayList<Admin_FaqVo> list(int startRow,int endRow,String field,String keyword){
 		String sql=null;
-		if(field==null || field.equals("")) { //검색조건이 없는 경우
+		if(field==null || field.equals("")) { 
 		    sql= "select * from " + 
 				"( " + 
 				"  select board.*,rownum rnum from " + 
 				"  (" + 
-				"	  select * from faq order by mid desc" + 
+				"	  select * from faq order by fid desc" + 
 				"  ) board" + 
 				") where rnum>=? and rnum<=?";
-		}else{ //검색조건이 있는 경우
+		}else{ 
 			sql="select * from " + 
 				"( " + 
 				"  select board.*,rownum rnum from " + 
 				"  (" + 
-				"	  select * from faq where "+ field +" like '%"+ keyword + "%' order by mid desc" + 
+				"	  select * from faq where "+ field +" like '%"+ keyword + "%' order by fid desc" + 
 				"  ) board" + 
 				") where rnum>=? and rnum<=?";
 		 }
@@ -45,7 +45,6 @@ public class Admin_FaqDao {
 						rs.getInt("fid"),
 						rs.getString("ftitle"),
 						rs.getString("fcontent"), 
-						rs.getString("ffile"), 
 						rs.getDate("frdate"),
 						rs.getInt("fhit"),
 						rs.getInt("fpublic_private"),
@@ -58,6 +57,49 @@ public class Admin_FaqDao {
 			return null;
 		}finally {
 			DBConnection.close(con, pstmt, rs);
+		}
+	}
+	public int getCount(String field,String keyword) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=DBConnection.getCon();
+			String sql="select NVL(count(*),0) from faq";
+			if(field!=null && !field.equals("")) {
+				sql += " where " + field + " like '%" + keyword +"%'";
+			}		
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				int n=rs.getInt(1);
+				return n;
+			}
+			return -1;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
+		}finally {
+			DBConnection.close(con, pstmt, rs);
+		}
+	}
+	public int insert(Admin_FaqVo vo) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=DBConnection.getCon();
+			String sql="insert into faq values(seq.nextval,?,?,sysdate,0,?,?)";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, vo.getFtitle());
+			pstmt.setString(2, vo.getFcontent());
+			pstmt.setInt(3, vo.getFpublic_private());
+			pstmt.setString(4, vo.getAid());
+			return pstmt.executeUpdate();
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return -1;
+		}finally {
+			DBConnection.close(con, pstmt, null);
 		}
 	}
 }

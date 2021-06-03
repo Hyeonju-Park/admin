@@ -15,7 +15,7 @@
 </head>
 <body>
 <div id="qnabox">
-	<form method="post" action="${cp }/admin/qna" enctype="multipart/form-data">
+	<form method="post" action="<%=request.getContextPath()%>/admin/qna" enctype="multipart/form-data">
 		<select name="field">
 			<option value="item">상품문의</option>
 			<option value="delivery">배송문의</option>

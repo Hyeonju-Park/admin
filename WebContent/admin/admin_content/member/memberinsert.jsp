@@ -28,7 +28,31 @@
 		이메일<input type="text" name="memail"><br>
 		우편번호<input type="text" name="mpost"><br>
 		전화번호<input type="text" name="mphone"><br>
-		생일<input type="text" name="mbirth" required="required"><p style="color:gray">(yyyy-MM-dd 형식으로 입력)</p><br>
+		
+		생일	
+		<select name="year">
+	      <c:forEach begin="1990" end="2000" var="y">
+	         <option>
+	               ${y }
+	         </option>
+	      </c:forEach>
+		</select>
+		
+		<select name="month">
+	      <c:forEach begin="1" end="12" var="m">
+	         <option>
+	               ${m }
+	         </option>
+	      </c:forEach>
+		</select>
+		
+		<select name="day">
+	      <c:forEach begin="1" end="31" var="d">
+	         <option>
+	               ${d }
+	         </option>
+	      </c:forEach>
+		</select>
 		<input type="submit" value="등록" id="submitbtn" disabled="disabled">
 	</form>
 	

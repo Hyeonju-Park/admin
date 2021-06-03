@@ -1,52 +1,32 @@
 package admin.controller;
 
-import java.io.IOException;
+import java.io.File;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-@WebServlet("/admin/qna")
+import admin.dao.Admin_FaqDao;
+import admin.vo.Admin_FaqVo;
+
 public class Admin_QnaController extends HttpServlet{
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setAttribute("content","/admin/admin_content/board/qna.jsp");
-		req.getRequestDispatcher("/admin/admin_content/index.jsp").forward(req, resp);
-	}
-	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		req.setCharacterEncoding("utf-8");
-//		
-//		String saveDir=getServletContext().getRealPath("/upload");
-//		MultipartRequest mr=new MultipartRequest(req, // request°´Ã¼
-//				saveDir,  //¾÷·ÎµåÇÒ µğ·ºÅä¸® °æ·Î
-//				1024*1024*5, // ÃÖ´ë ¾÷·Îµå Å©±â(¹ÙÀÌÆ®)
-//				"utf-8", //ÀÎÄÚµù¹æ½Ä
-//				new DefaultFileRenamePolicy()//µ¿ÀÏÇÑ ÆÄÀÏ¸íÀÌ Á¸ÀçÇÒ½Ã ÆÄÀÏ¸íµÚ¿¡ ÀÏ·Ã¹øÈ£(1,2,3,..)À» ºÙ¿©¼­ ÆÄÀÏ »ı¼º
-//		);
-//		
-//		String field=req.getParameter("field");
-//		String qwriter=req.getParameter("qwriter");
-//		String qpw=req.getParameter("qpw");
-//		String qtitle=req.getParameter("qtitle");
-//		String qcontent=req.getParameter("qcontent");
-//		String orgFileName=mr.getOriginalFileName("file1");//Àü¼ÛµÈ ÆÄÀÏ¸í
-//		String saveFileName=mr.getFilesystemName("file1");//¼­¹ö¿¡ ÀúÀåµÈ ÆÄÀÏ¸í
-		//ÆÄÀÏ°æ·Î ´Ù½Ã¹Ş¾Æ¿Í¾ßÇÔ (jsp18)
+	req.setCharacterEncoding("utf-8");
+	String saveDir=getServletContext().getRealPath("/upload");
+	MultipartRequest mr=new MultipartRequest(req, // requestê°ì²´
+			saveDir,  //ì—…ë¡œë“œí•  ë””ë ‰í† ë¦¬ ê²½ë¡œ
+			1024*1024*5, // ìµœëŒ€ ì—…ë¡œë“œ í¬ê¸°(ë°”ì´íŠ¸)
+			"utf-8", //ì¸ì½”ë”©ë°©ì‹
+			new DefaultFileRenamePolicy()//ë™ì¼í•œ íŒŒì¼ëª…ì´ ì¡´ì¬í• ì‹œ íŒŒì¼ëª…ë’¤ì— ì¼ë ¨ë²ˆí˜¸(1,2,3,..)ì„ ë¶™ì—¬ì„œ íŒŒì¼ ìƒì„±
+	);
+	String fwriter=req.getParameter("fwriter");
+	String ftitle=req.getParameter("ftitle");
+	String fcontent=req.getParameter("fcontent");
+	String file1=req.getParameter("file1");
+	String orgFileName=mr.getOriginalFileName("file1");//ì „ì†¡ëœ íŒŒì¼ëª…
 	
-			System.out.println("test");
-		System.out.println("¾÷·Îµå °æ·Î:" + saveDir);
-//		req.setAttribute("filed", field);
-//		req.setAttribute("qwriter", qwriter);
-//		req.setAttribute("qpw", qpw);
-//		req.setAttribute("qtitlq", qtitle);
-//		req.setAttribute("qcontent", qcontent);
-		req.setAttribute("content","/admin/admin_content/board/qna.jsp");
-		req.getRequestDispatcher("/admin/admin_content/index.jsp").forward(req, resp);
-	}
+	
+	Admin_FaqDao dao=new Admin_FaqDao();
+	Admin_FaqVo vo=new Admin_FaqVo(0, ftitle, fcontent, 0, null, 0, 0, saveFileName);
+	File f=new File(saveDir +"\\" + saveFileName);
 }
