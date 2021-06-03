@@ -96,11 +96,3 @@ input[id="menuicon"]:checked + ul + div {left:0;}
 	left:90%;
 	top:15px;
 }
-
-#content {
-	height:100%;
-	width: 100%;
-	position: fixed;
-	top: 40px;
-	background: white;
-}

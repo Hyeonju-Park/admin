@@ -45,7 +45,7 @@
 		상품관리
 			<ul class="sub">
 				<li><a href="${cp }/admin/inbound/list">입고</a></li>
-				<li>menu2 - 2</li>
+				<li><a href="${cp }/admin/product/list">등록</a></li>
 				<li>menu2 - 3</li>
 			</ul>
 		</li>

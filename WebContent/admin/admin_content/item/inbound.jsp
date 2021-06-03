@@ -40,7 +40,6 @@
 	<label class="label_inprice">가격</label><input type="text" name="input_inprice" style="position:absolute;top:200px;left:500px;width: 150px;font-size: 0.8rem;"/>
 	<label class="label_inamount">입고량</label><input type="text" name="input_inamount" style="position:absolute;top:100px;left:500px;width: 150px;	font-size: 0.8rem;"/>
 	<input type="submit" value="등록" id="insertbtn">
-	<!-- <input type="button" value="수정" id="updatebtn"> -->
 </form>
 <h3 class="inboundtext3">50개미만 상품</h3>
 <div id="columnchart_material"></div>
@@ -145,4 +144,3 @@
 	}
 </script>
 </div>
-

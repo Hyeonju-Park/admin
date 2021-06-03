@@ -2,7 +2,6 @@
 /* 입고관리 */
 /* boardcss_list 에서 사용하는 글 목록 테이블 크기*/
 
-
 .boardcss_list_table { 
 	position:absolute;
 	height:400px;
