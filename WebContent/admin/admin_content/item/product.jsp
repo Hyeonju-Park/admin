@@ -37,7 +37,7 @@
 
 <div class="product_input">
 <h3 class="producttext2">주문등록</h3>
-<form action="${cp }/admin/product/upload" enctype="multipart/form-data">
+<form action="${cp }/admin/product/upload" enctype="multipart/form-data"  method="post">
 	<label class="label_img1">대표이미지</label>
 	<input type="file" name="pimage1" style="position: absolute;top:50px;left:150px;width:250px; font-size: 0.9rem;">
 	<img id="large_img1">
@@ -47,11 +47,36 @@
 	<label class="label_img3">추가이미지2</label>
 	<input type="file" name="pimage3" style="position: absolute;top:400px;left:400px;width:250px; font-size: 0.9rem;">
 	<img id="large_img3">
-	<label class="label_price">가격</label><input type="text" name="pprice" style="position:absolute;top:660px;left:100px;width: 200px;font-size: 0.9rem;" />
-	<label class="label_discount">할인율</label><input type="text" name="pdiscount" style="position:absolute;top:660px;left:450px;width: 200px;font-size: 0.9rem;" />
+	<label class="label_sid">상품번호</label>
+	<select id="select_sid" onchange="chang_sid()" name="sid" style="position:absolute;top:660px;left:100px;width: 100px;font-size:0.9rem;">
+		<c:forEach var="vo" items="${list }">
+			<option>${vo.sid }</option>
+		</c:forEach>
+	</select>
+	<label class="label_amount">상품수량</label><input type="text" name="amount" readonly="readonly" style="position:absolute;top:660px;left:350px;width: 200px;font-size: 0.9rem;" />
+	<label class="label_price">가격</label><input type="text" name="pprice" style="position:absolute;top:760px;left:100px;width: 200px;font-size: 0.9rem;" />
+	<label class="label_discount">할인율</label><input type="text" name="pdiscount" style="position:absolute;top:760px;left:450px;width: 200px;font-size: 0.9rem;" />
 	<input type="submit" class="insertbtn" value="등록">
 </form>
 </div>
+<script type="text/javascript">
+	function chang_sid(){
+			let sid=document.getElementById("select_sid").value;
+			let amount=document.getElementsByName("amount")[0].value;
+			let xhr=new XMLHttpRequest();
+			xhr.onreadystatechange=function(){
+				if(xhr.readyState==4 && xhr.status==200){
+					let result=xhr.responseXML;
+					let code=xml.getElementsByTagName("amount")[0].textContent;
+					console.log(code);
+				}
+			};
+			xhr.open('post','${pageContext.request.contextPath}/admin/stock/find',true);
+			xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			let params="sid="+sid;
+			xhr.send(params);
+		}
+</script>
 <!-- <script type="text/javascript">
 	window.onload=function(){
 		var content="<%=request.getContextPath()%>/admin/upload/";

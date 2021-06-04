@@ -81,4 +81,32 @@ public class Admin_StockDao {
 			DBConnection.close(con, pstmt, null);
 		}
 	}
+	public Admin_StockVo selectsid(int sid) {
+		String sql="select * from stock where sid=?";
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=DBConnection.getCon();
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, sid);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				sid=rs.getInt("sid");
+				String sname=rs.getString("sname");
+				String scolor=rs.getString("scolor");
+				String ssize=rs.getString("ssize");
+				int samount=rs.getInt("samount");
+				Admin_StockVo vo=new Admin_StockVo(sid, sname, scolor, ssize, samount);
+				return vo;
+			}else {
+				return null;
+			}
+		}catch(SQLException s) {
+			s.printStackTrace();
+			return null;
+		}finally {
+			DBConnection.close(con,pstmt,rs);
+		}
+	}
 }

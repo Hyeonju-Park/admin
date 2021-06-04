@@ -1,0 +1,162 @@
+CREATE TABLE INBOUND
+(
+	INID NUMBER(4) NOT NULL,
+	INDATE DATE,
+	INNAME VARCHAR2(100),
+	INPRICE NUMBER(10),
+	INAMOUNT NUMBER(4),
+	INCOLOR VARCHAR2(20),
+	INSIZE VARCHAR2(20),
+	INCATEGORY VARCHAR2(50),
+	PRIMARY KEY (INID)
+);
+
+create SEQUENCE INBOUND_seq;
+
+INSERT INTO INBOUND VALUES(1,'2019-01-30','[ganaesra made] 실링 린넨 하프자켓',67000,100,'아이보리','S','outer');
+INSERT INTO INBOUND VALUES(2,'2019-01-31','[ganaesra made] 실링 린넨 하프자켓',67000,100,'아이보리','M','outer');
+INSERT INTO INBOUND VALUES(3,'2019-02-01','[ganaesra made] 실링 린넨 하프자켓',67000,100,'레드','S','outer');
+INSERT INTO INBOUND VALUES(4,'2019-02-01','[ganaesra made] 실링 린넨 하프자켓',67000,100,'레드','M','outer');
+INSERT INTO INBOUND VALUES(5,'2019-02-02','[ganaesra made] 썸머 넌스 브이넥자켓',66000,150,'라이트베이지','S','outer');
+INSERT INTO INBOUND VALUES(6,'2019-02-02','[ganaesra made] 썸머 넌스 브이넥자켓',66000,200,'라이트베이지','M','outer');
+INSERT INTO INBOUND VALUES(7,'2019-02-05','[ganaesra made] 썸머 넌스 브이넥자켓',66000,150,'멜론','S','outer');
+INSERT INTO INBOUND VALUES(8,'2019-02-05','[ganaesra made] 썸머 넌스 브이넥자켓',66000,200,'멜론','M','outer');
+INSERT INTO INBOUND VALUES(9,'2019-02-10','[ganaesra made] 시에나 린넨 하프자켓',69500,100,'차콜','S','outer');
+INSERT INTO INBOUND VALUES(10,'2019-02-10','[ganaesra made] 시에나 린넨 하프자켓',69500,100,'차콜','M','outer');
+INSERT INTO INBOUND VALUES(11,'2019-02-12','[ganaesra made] 로아 트위드 하프자켓',91000,100,'아이보리','FREE','outer');
+INSERT INTO INBOUND VALUES(12,'2019-02-15','[ganaesra made] 로아 트위드 하프자켓',91000,150,'블랙','FREE','outer');
+INSERT INTO INBOUND VALUES(13,'2019-02-22','[ganaesra made] 실링 린넨 하프자켓',67000,100,'아이보리','S','outer');
+INSERT INTO INBOUND VALUES(14,'2019-02-23','[ganaesra made] 실링 린넨 하프자켓',67000,100,'아이보리','M','outer');
+INSERT INTO INBOUND VALUES(15,'2019-03-01','[ganaesra made] 실링 린넨 하프자켓',67000,100,'레드','S','outer');
+INSERT INTO INBOUND VALUES(16,'2019-03-01','[ganaesra made] 실링 린넨 하프자켓',67000,100,'레드','M','outer');
+INSERT INTO INBOUND VALUES(17,'2019-03-02','[ganaesra made] 썸머 넌스 브이넥자켓',66000,150,'라이트베이지','S','outer');
+INSERT INTO INBOUND VALUES(18,'2019-03-02','[ganaesra made] 썸머 넌스 브이넥자켓',66000,200,'라이트베이지','M','outer');
+
+
+CREATE TABLE STOCK
+(
+	SID NUMBER(4) NOT NULL,
+	SNAME VARCHAR2(100),
+	SCOLOR VARCHAR2(20),
+	SSIZE VARCHAR2(20),
+	SAMOUNT NUMBER(4),
+	PRIMARY KEY (SID)
+);
+
+create SEQUENCE STOCK_seq;
+
+INSERT INTO STOCK VALUES(1,'[ganaesra made] 로아 트위드 하프자켓','아이보리','FREE',100);
+INSERT INTO STOCK VALUES(2,'[ganaesra made] 썸머 넌스 브이넥자켓','라이트베이지','S',300);
+INSERT INTO STOCK VALUES(3,'[ganaesra made] 썸머 넌스 브이넥자켓','멜론','S',150);
+INSERT INTO STOCK VALUES(4,'[ganaesra made] 실링 린넨 하프자켓','아이보리','S',200);
+INSERT INTO STOCK VALUES(5,'[ganaesra made] 실링 린넨 하프자켓','레드','S',200);
+INSERT INTO STOCK VALUES(6,'[ganaesra made] 실링 린넨 하프자켓','레드','M',200);
+INSERT INTO STOCK VALUES(7,'[ganaesra made] 시에나 린넨 하프자켓','차콜','S',100);
+INSERT INTO STOCK VALUES(8,'[ganaesra made] 실링 린넨 하프자켓','아이보리','M',200);
+INSERT INTO STOCK VALUES(9,'[ganaesra made] 시에나 린넨 하프자켓','차콜','M',100);
+INSERT INTO STOCK VALUES(10,'[ganaesra made] 로아 트위드 하프자켓','블랙','FREE',150);
+INSERT INTO STOCK VALUES(11,'[ganaesra made] 썸머 넌스 브이넥자켓','라이트베이지','M',400);
+INSERT INTO STOCK VALUES(12,'[ganaesra made] 썸머 넌스 브이넥자켓','멜론','M',200);
+
+CREATE TABLE PRODUCT
+(
+	PID NUMBER(3) NOT NULL,
+	PPRICE NUMBER(10),
+	PDISCOUNT NUMBER(4),
+	PIMAGE1 VARCHAR2(4000),
+	PIMAGE2 VARCHAR2(4000),
+	-- DATE DEFAULT SYSDATE
+	PRDATE DATE,
+	-- DEFAULT 0
+	PAMOUNT number(4),
+	PSELL NUMBER(3),
+	SID NUMBER(4) NOT NULL,
+	PRIMARY KEY (PID)
+);
+
+create SEQUENCE PRODUCT_seq;
+
+CREATE TABLE USERQNA
+(
+	QID NUMBER(4) NOT NULL,
+	QCATE VARCHAR2(20),
+	QPW VARCHAR2(100),
+	QTITLE VARCHAR2(300),
+	QCONTENT VARCHAR2(4000),
+	QFILE VARCHAR2(4000),
+	-- DATE DEFAULT SYSDATE
+	QRDATE DATE,
+	QLEV NUMBER(3),
+	QREF NUMBER(3),
+	MID VARCHAR2(100) NOT NULL,
+	PID NUMBER(3) NOT NULL,
+	PRIMARY KEY (QID)
+);
+
+create SEQUENCE userQna_seq;
+
+insert into members values('userid','1234','test','testaddr','1234','010',sysdate,sysdate,0,0,'@naver');
+insert into product values(1,1000,5,'testimg','testimg2','testimg2',sysdate,0,1);
+INSERT INTO USERQNA VALUES(1,'상품','test','testtitle','testcontent','testflie',sysdate,0,0,'userid',1);
+INSERT INTO USERQNA VALUES(2,'상품','test','testtitle','testcontent','testflie',sysdate,0,0,'userid',1);
+INSERT INTO USERQNA VALUES(3,'상품','test','testtitle','testcontent','testflie',sysdate,0,0,'userid',1);
+INSERT INTO USERQNA VALUES(4,'교환','test','testtitle','testcontent','testflie',sysdate,0,0,'userid',1);
+INSERT INTO USERQNA VALUES(5,'교환','test','testtitle','testcontent','testflie',sysdate,0,0,'userid',1);
+INSERT INTO USERQNA VALUES(6,'교환','test','testtitle','testcontent','testflie',sysdate,0,0,'userid',1);
+INSERT INTO USERQNA VALUES(7,'교환','test','testtitle','testcontent','testflie',sysdate,0,0,'userid',1);
+INSERT INTO USERQNA VALUES(8,'교환','test','testtitle','testcontent','testflie',sysdate,0,0,'userid',1);
+INSERT INTO USERQNA VALUES(9,'환불','test','testtitle','testcontent','testflie',sysdate,0,0,'userid',1);
+INSERT INTO USERQNA VALUES(11,'환불','test','testtitle','testcontent','testflie',sysdate,1,0,'userid',1);
+INSERT INTO USERQNA VALUES(12,'사이트이용','test','testtitle','testcontent','testflie',sysdate,1,0,'userid',1);
+INSERT INTO USERQNA VALUES(13,'환불','test','testtitle','testcontent','testflie',sysdate,1,0,'userid',1);
+INSERT INTO USERQNA VALUES(14,'기타','test','testtitle','testcontent','testflie',sysdate,1,0,'userid',1);
+INSERT INTO USERQNA VALUES(15,'기타','test','testtitle','testcontent','testflie',sysdate,1,0,'userid',1);
+INSERT INTO USERQNA VALUES(16,'기타','test','testtitle','testcontent','testflie',sysdate,1,0,'userid',1);
+INSERT INTO USERQNA VALUES(17,'기타','test','testtitle','testcontent','testflie',sysdate,0,0,'userid',1);
+INSERT INTO USERQNA VALUES(18,'기타','test','testtitle','testcontent','testflie',sysdate,0,0,'userid',1);
+INSERT INTO USERQNA VALUES(19,'기타','test','testtitle','testcontent','testflie',sysdate,0,0,'userid',1);
+INSERT INTO USERQNA VALUES(20,'상품','test','testtitle','testcontent','testflie',sysdate,0,0,'userid',1);
+INSERT INTO USERQNA VALUES(21,'기타','test','testtitle','testcontent','testflie',sysdate,0,0,'userid',1);
+INSERT INTO USERQNA VALUES(22,'기타','test','testtitle','testcontent','testflie',sysdate,0,0,'userid',1);
+INSERT INTO USERQNA VALUES(23,'기타','test','testtitle','testcontent','testflie',sysdate,0,0,'userid',1);
+INSERT INTO USERQNA VALUES(24,'기타','test','testtitle','testcontent','testflie',sysdate,0,0,'userid',1);
+INSERT INTO USERQNA VALUES(25,'기타','test','testtitle','testcontent','testflie',sysdate,0,0,'userid',1);
+
+
+CREATE TABLE ORDERS
+(
+	ORID NUMBER(10) NOT NULL,
+	ORDATE DATE,
+	ORNAME VARCHAR2(100),
+	ORPHONE VARCHAR2(300),
+	ORADDRESS VARCHAR2(500),
+	ORPOST VARCHAR2(10),
+	ORPAYMENT varchar2(20),
+	ORINVOICE NUMBER(10),
+	ORDELPAY NUMBER(10),
+	ORDELIVERY CHAR(1),
+	ORCOMPLETE CHAR(1),
+	ORCANCLE CHAR(1),
+	MID VARCHAR2(100) NOT NULL,
+	PRIMARY KEY (ORID)
+);
+
+create SEQUENCE ORDERS_seq;
+
+insert into ORDERS values(1,sysdate,'테스터','010-1111-1111','강동구','134-011','카드',1313,2500,'N','N','N','userid');
+insert into ORDERS values(2,sysdate,'테스터','010-1111-1111','강동구','134-011','카드',1313,2500,'N','N','N','userid');
+insert into ORDERS values(3,sysdate,'테스터','010-1111-1111','강동구','134-011','카드',1313,2500,'N','N','N','userid');
+insert into ORDERS values(4,sysdate,'테스터','010-1111-1111','강동구','134-011','카드',1313,2500,'Y','Y','N','userid');
+insert into ORDERS values(5,sysdate,'테스터','010-1111-1111','강동구','134-011','카드',1313,2500,'Y','N','N','userid');
+insert into ORDERS values(6,sysdate,'테스터','010-1111-1111','강동구','134-011','카드',1313,2500,'N','N','N','userid');
+insert into ORDERS values(7,sysdate,'테스터','010-1111-1111','강동구','134-011','카드',1313,2500,'N','N','N','userid');
+insert into ORDERS values(8,sysdate,'테스터','010-1111-1111','강동구','134-011','카드',1313,2500,'Y','Y','N','userid');
+insert into ORDERS values(9,sysdate,'테스터','010-1111-1111','강동구','134-011','카드',1313,2500,'N','N','N','userid');
+insert into ORDERS values(10,sysdate,'테스터','010-1111-1111','강동구','134-011','카드',1313,2500,'N','N','N','userid');
+insert into ORDERS values(11,sysdate,'테스터','010-1111-1111','강동구','134-011','카드',1313,2500,'Y','N','N','userid');
+insert into ORDERS values(12,sysdate,'테스터','010-1111-1111','강동구','134-011','카드',1313,2500,'N','N','Y','userid');
+insert into ORDERS values(13,sysdate,'테스터','010-1111-1111','강동구','134-011','카드',1313,2500,'N','N','Y','userid');
+insert into ORDERS values(14,sysdate,'테스터','010-1111-1111','강동구','134-011','카드',1313,2500,'Y','N','N','userid');
+insert into ORDERS values(15,sysdate,'테스터','010-1111-1111','강동구','134-011','카드',1313,2500,'Y','Y','N','userid');
+insert into ORDERS values(16,sysdate,'테스터','010-1111-1111','강동구','134-011','카드',1313,2500,'Y','N','N','userid');
+insert into ORDERS values(17,sysdate,'테스터','010-1111-1111','강동구','134-011','카드',1313,2500,'N','N','Y','userid');

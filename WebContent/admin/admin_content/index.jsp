@@ -76,9 +76,9 @@
 	</ul>
 	<ul id="ac">
 		<li class="main">
-		대시보드
+		메인
 			<ul class="sub">
-				<li>menu2 - 1</li>
+				<li><a href="${cp }/admin/main">메인</a></li>
 				<li>menu2 - 2</li>
 				<li>menu2 - 3</li>
 			</ul>

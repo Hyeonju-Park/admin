@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>admin_login.jsp</title>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/admin/css/admin.css">
 </head>
 <body>
 <h1>관리자 로그인</h1>

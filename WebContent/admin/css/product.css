@@ -80,16 +80,30 @@
 	font-size: 0.9rem;
 }
 
-.label_price{
+.label_sid{
 	position:absolute;
 	top:660px;
 	left:50px;
 	font-size: 0.9rem;
 }
 
-.label_discount{
+.label_amount{
 	position:absolute;
 	top:660px;
+	left:250px;
+	font-size: 0.9rem;
+}
+
+.label_price{
+	position:absolute;
+	top:760px;
+	left:50px;
+	font-size: 0.9rem;
+}
+
+.label_discount{
+	position:absolute;
+	top:760px;
 	left:400px;
 	font-size: 0.9rem;
 }
