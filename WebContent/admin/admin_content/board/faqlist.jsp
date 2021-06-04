@@ -37,20 +37,32 @@
 	</form>
 </div>
 <div id="list">
-	<table border="1">
+<div>
+	<table class="table">
+		<tr>
+			<th colspan="6">공개테이블</th>
+		</tr>
 		<tr>
 			<th>작성자</th>
 			<th>제목</th>
 			<th>공개여부</th>
 			<th>작성날짜</th>			
+			<th>수정</th>			
+			<th>삭제</th>			
 		</tr>
 	<c:forEach var="vo" items="${list }">
+	<c:choose>
+		<c:when test="${vo.fpublic_private==1 }">
 		<tr>
 			<td>${vo.aid }</td>
 			<td>${vo.ftitle }</td>
-			<td>${vo.fpublic_private }</td>
+			<td>공개</td>
 			<td>${vo.frdate }</td>
+			<td><input type="button" name="update" value="수정" onclick="showPopup()"></td>
+			<td><a href="">삭제</a></td>
 		</tr>
+		</c:when>
+		</c:choose>
 	</c:forEach>
 	</table>
 	<c:if test="${startPageNum>10 }">
@@ -69,8 +81,75 @@
 	<c:if test="${endPageNum<pageCount }">
 		<a href="${cp }/admin/faq/list?pageNum=${endPageNum+1 }">[다음]</a>
 	</c:if>
-	
+	<form method="post" action="${cp }/admin/faq/list">
+		<select name="field">
+			<option value="ftitle">제목</option>
+			<option value="fcontent">내용</option>
+		</select>
+		<input type="text" name="keyword">
+	<input type="button" value="검색">
+	</form>	<br>
 </div>
-
+<div>
+	<table class="table">
+		<tr>
+			<th colspan="6">비공개테이블</th>
+		</tr>
+		<tr>
+			<th>작성자</th>
+			<th>제목</th>
+			<th>공개여부</th>
+			<th>작성날짜</th>			
+			<th><input type="button" name="update" value="수정" onclick="showPopup()"></th>			
+			<th><a href="">삭제</a></th>			
+		</tr>
+	<c:forEach var="vo" items="${list1 }">
+	<c:choose>
+		<c:when test="${vo.fpublic_private==0 }">
+		<tr>
+			<td>${vo.aid }</td>
+			<td>${vo.ftitle }</td>
+			<td>비공개</td>
+			<td>${vo.frdate }</td>
+			<td><a href="${cp }/admin/admin_content/board/faqlistupdate.jsp?fid=${vo.fid }">수정</a></td>
+		</tr>
+		</c:when>
+		</c:choose>
+	</c:forEach>
+	</table>
+	<c:if test="${startPageNum1>10 }">
+		<a href="${cp }/admin/faq/list1?pageNum1=${startPageNum1-1 }">[이전]</a>
+	</c:if>
+	<c:forEach var="i" begin="${startPageNum1 }" end="${endPageNum1 }">
+		<c:choose>
+			<c:when test="${pageNum1==i }"><%--현재페이지인경우 --%>
+				<a href="${cp }/admin/faq/list?pageNum1=${i }"><span style="color:blue">[${i }]</span></a>
+			</c:when>
+			<c:otherwise>
+				<a href="${cp }/admin/faq/list?pageNum1=${i }"><span style="color:gray">[${i }]</span></a>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+	<c:if test="${endPageNum1<pageCount1 }">
+		<a href="${cp }/admin/faq/list?pageNum1=${endPageNum1+1 }">[다음]</a>
+	</c:if>	
+	<form method="post" action="${cp }/admin/faq/list">
+		<select name="field1">
+			<option value="ftitle1">제목</option>
+			<option value="fcontent1">내용</option>
+		</select>
+		<input type="text" name="keyword1">
+	<input type="button" value="검색">
+	</form>
+</div>
+</div>
+<script type="text/javascript">
+	var name=document.getElementsByName("name");
+	var url="<%=request.getContextPath()%>/admin/admin_content/board/faqlistupdate.jsp"
+	var size="width=500, height=500, left=100, top=50"
+	function showPopup(){
+		window.open(url,"수정",size);
+	}
+</script>
 </body>
 </html>
